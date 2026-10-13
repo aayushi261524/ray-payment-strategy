@@ -12,11 +12,13 @@ The problem behind Ray came from my years on PayPal's Merchant Pricing and Reven
 
 | Tool | How it supported the work |
 |---|---|
+| Claude (claude.ai, Opus) | Research synthesis, critique of the idea, editing the one-pager, checking calculations and browser walkthroughs of the prototype |
+| ChatGPT | An independent second critique of the problem statement and the full idea |
 | GitHub Copilot | Coding assistance during prototype development, guided by my product specification |
 | Vercel | Public hosting; not an AI tool |
 | GitHub | Read-only source sharing for reviewers; not an AI tool |
 
-The named coding tool was GitHub Copilot; its exact model version was not recorded. The broader research, critique and design workflow below is described as AI-assisted. The tool list is selective rather than an exhaustive inventory.
+Exact model versions for ChatGPT and Copilot were not recorded.
 
 ---
 
@@ -83,7 +85,7 @@ Three design choices shaped the split:
 
 ### Rejected: AI scored the idea's differentiation as low
 
-In one critique round, AI argued that Razorpay Optimizer already does routing, so the idea wasn't differentiated. I disagreed and kept the position, but I had to evidence it. Existing routing rules and simulators establish that merchants already have routing controls. My proposed differentiator is the connected workflow: interpret the merchant’s terms, clarify contradictions, test routing against confirmed obligations, and verify the approved configuration. This is a product hypothesis based on the reviewed material, not proof that competitors lack unpublished capabilities.
+In one critique round, AI argued that Razorpay Optimizer already does routing, so the idea wasn't differentiated. I disagreed and kept the position, but I had to evidence it. Existing routing rules and simulators establish that merchants already have routing controls. My proposed differentiator is the connected workflow: interpret the merchant’s terms, clarify contradictions, test routing against confirmed obligations, and verify the approved configuration.
 
 ### Corrected: a financial example that contradicted the prototype
 
@@ -152,7 +154,7 @@ Practitioner input helped shape network-informed starter suggestions and the emp
 - **Misread contract terms.** Mitigation: every term links to its source clause, and unclear terms trigger a question instead of a guess.
 - **Volume commitments missed in practice.** A split like 84/16 is a forecast. Production would need to track actual monthly share, because traffic varies. The prototype checks a supplied traffic-share assumption; it does not ingest actual monthly payment records.
 - **Stale or conflicting changes.** A stale approval blocks the write, and a read-back mismatch is never marked Verified.
-- **Confidential contracts.** Merchant agreements are commercially sensitive. In production they would be accessible only to authorised users, kept no longer than needed, and never used for other merchants or for model training.
+- **Confidential contracts: proposed production safeguards.** The design commitment is merchant-scoped authorised access, defined retention and deletion, and no reuse of contracts for other merchants or model training. These production safeguards have not been implemented or independently audited in this simulated prototype.
 - **Optimizer capability gaps.** The prototype models campaign dates and an approval-led expiry review. Production would need to confirm supported Optimizer conditions and implement authorised scheduling where necessary; automatic publishing and retirement are not integrated here.
 
 ### Verification steps
@@ -164,11 +166,9 @@ Practitioner input helped shape network-informed starter suggestions and the emp
 | Figure | How it is calculated |
 |---|---|
 | ₹12,400 at risk | 1,240 festive EMI payments × 1 in 10 going to Indus PG × ₹100 assumed benefit each, using historical matching volume. Estimated routing exposure falls to ₹0 under a compatible tested option; this is not confirmed subsidy loss or recovery |
-| ₹15.96 per payment | On a ₹10,000 order with ₹2,000 contribution, Northstar completes 97.8% at a ₹180 fee (₹1,779.96 expected) and Indus PG 98% at its standard ₹200 fee (₹1,764). With the volume deal, Indus PG's fee drops to ₹185 (₹1,778.70), so Northstar's advantage narrows to ₹1.26, illustrating why confirmed pricing terms need to be included before comparing cost |
-| ₹7,980 and ₹15,960 | A cost-only comparison for a merchant with no Indus volume commitment, per 10,000 ordinary card payments starting from 90/10. Under the 15% floor, Ray would never propose these splits. Moving to 95/5 shifts 500 payments to Northstar, and moving to 100% shifts 1,000 |
+| ₹15.96 per payment | On a ₹10,000 order with ₹2,000 contribution, Northstar completes 97.8% at a ₹180 fee (₹1,779.96 expected) and Indus PG 98% at its standard ₹200 fee (₹1,764). With the volume deal, Indus PG's fee drops to ₹185 (₹1,778.70), so Northstar's advantage narrows to ₹1.26. The prototype demonstrates deal-adjusted cost comparison for its supported scenarios; comprehensive production enforcement would require integrated contract, pricing and transaction data. |
+| ₹7,980 and ₹15,960 | A cost-only comparison for a merchant with no Indus volume commitment, per 10,000 ordinary card payments starting from 90/10. In the supported 15% volume-floor scenario, these splits fail the contractual check and cannot become an approvable proposal. Moving to 95/5 shifts 500 payments to Northstar, and moving to 100% shifts 1,000 |
 | The 84/16 split | Campaign payments are 4% of card volume and must go to Northstar, so 16% of the remaining 96% gives Indus PG 15.36%, above its 15% floor |
-
-- **Evidence boundaries.** Product discussions referred to Razorpay and competitor documentation. This build log does not substantiate a source-count claim or serve as a current regulatory/pricing reference. The repository’s architecture notes distinguish implemented behaviours from intended integrations.
 
 ---
 

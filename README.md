@@ -29,6 +29,7 @@ node qa/agent-check.cjs
 The suite covers the two journeys, provider-bound percentage parsing, eligibility boundaries, calculations, contractual constraints, readiness, approvals and failure stops. It uses a mocked browser environment; this does not replace manual browser testing.
 
 ## Supporting material
+- [One-page product note (PDF)](docs/ray_one_pager_aayushi.pdf)
 - [Architecture and trust boundaries](ARCHITECTURE.md)
 - [Detailed AI build log](AI_BUILD_LOG.md)
 - [AI assistance summary](AI-BUILD-NOTES.md)
