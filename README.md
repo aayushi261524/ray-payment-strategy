@@ -30,7 +30,8 @@ The suite covers the two journeys, provider-bound percentage parsing, eligibilit
 
 ## Supporting material
 - [Architecture and trust boundaries](ARCHITECTURE.md)
-- [AI build approach](AI-BUILD-NOTES.md)
+- [Detailed AI build log](AI_BUILD_LOG.md)
+- [AI assistance summary](AI-BUILD-NOTES.md)
 - `qa/agent-results.json`: recorded automated results.
 
 ## Prototype boundaries
